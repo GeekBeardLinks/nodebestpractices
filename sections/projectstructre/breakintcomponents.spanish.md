@@ -2,15 +2,14 @@
 
 <br/><br/>
 
-### Párrafo de explicación
+### Explicación de un párrafo
 
-Para aplicaciones de tamaño medio o superior, los monolitos son bastante malos. Un enorme software con muchas dependencias se torna complicado de manejar y por lo general termina en código espagueti. Incluso arquitectos inteligentes –aquellos con suficiente habilidad como para domar a la bestia y "modularizarla"– invierten gran esfuerzo mental en el diseño, y cada cambio requiere una evaluación cuidadosa del impacto en dependencias. La solución definitiva es desarrollar software pequeño: dividir el total en componentes autocontenidos, que no compartan archivos con otros, cada uno de los cuales constituye un pequeño conjunto de archivos (ej. API, servicio, acceso de datos, pruebas, etc), lo que aporta una estructura muy fácil de digerir. Algunos lo llaman arquitectura de "microservicios". Es importante entender que los microservicios no son ninguna especificación que debas seguir, sino un conjunto de principios. Puedes optar por atenerte a muchos principios en una arquitectura de microservicios completa, o simplemente adoptar unos pocos. Ambas opciones son buenas siempre y cuando mantengas baja la complejidad del software. Al final, lo que deberías hacer es crear límites básicos entre componentes, asignar una carpeta en la raíz de tu proyecto para cada entidad de negocio (componente) y hacer que sea autocontenido. A otros componentes solo se les permite consumir su funcionalidad a través de su interfaz pública o API. Esta es la base para mantener tus componentes simples, evitar el infierno de las dependencias y abrir el camino a microservicios completos en el futuro una vez tu aplicación crezca.
-
+Para aplicaciones de tamaño medio o superior, los monolitos *no modulares* son bastante malos. Tener un gran software con un "spaghetti" de dependencias es simplemente dificil de razonar sobre él. La solución definitiva es desarrollar software más pequeño: dividir toda la pila en componentes autónomos que no compartan archivos con otros, cada uno es una aplicación lógica independiente (por ejemplo, tienen su propia API, servicios, acceso a datos, tests, etc.) de modo que incorporarse a él y cambiar el código sea mucho más fácil que lidiar con todo el sistema. Algunos pueden llamar a esto arquitectura de 'microservicios'; es importante comprender que los microservicios no son una especificación que se deba seguir, sino más bien un conjunto de principios. Puede adoptar muchos principios en una arquitectura de microservicios completa o adoptar solo unos pocos. Lo mínimo que debe hacer es crear límites básicos entre los componentes, asignar una carpeta o repositorio en la raíz de su sistema para cada componente de negocio y hacerlo autónomo. Otros componentes pueden consumir su funcionalidad solo a través de su interfaz pública o API. Esta es la base para mantener sus componentes simples, evitar el infierno de dependencias y allanar el camino  hacia los microservicios completos en un futuro una vez que su aplicación crezca.
 <br/><br/>
 
 ### Blog Quote: "Scaling requires scaling of the entire application"
 
- From the blog MartinFowler.com
+ From the blog [MartinFowler.com](https://martinfowler.com/articles/microservices.html)
 
 > Monolithic applications can be successful, but increasingly people are feeling frustrations with them - especially as more applications are being deployed to the cloud. Change cycles are tied together - a change made to a small part of the application requires the entire monolith to be rebuilt and deployed. Over time it's often hard to keep a good modular structure, making it harder to keep changes that ought to only affect one module within that module. Scaling requires scaling of the entire application rather than parts of it that require greater resource.
 
@@ -26,16 +25,43 @@ Para aplicaciones de tamaño medio o superior, los monolitos son bastante malos.
 
 > *...si observas la arquitectura de una biblioteca, es probable que veas una gran entrada, un área para entrada-salida de empleados, áreas de lectura, pequeñas salas de conferencias, y galería tras galería capaces de sostener estanterías para todos los libros en la biblioteca. Esa arquitectura gritaría: Biblioteca*
 
-Así que, ¿Qué gritaría la arquitectura de tu aplicación? Cuando ves la estructura del directorio superior, y los archivos fuente en el paquete de más alto nivel; ¿Gritan Sistema de Cuidado de Salud? o ¿Sistema de Contabilidad? o ¿Sistema de Manejo de Inventario? o a caso ¿gritan Rails? o ¿Spring/Hibernate? o ¿ASP?
+Así que, ¿qué es lo que grita la arquitectura de tu aplicación? Cuando ves la estructura de directorios en el nivel superior y los archivos fuente en el paquete de más alto nivel; gritan: ¿Sistema de Cuidado de Salud,  Sistema de Contabilidad o Sistema de Manejo de Inventario? o a caso gritan ¿Rails, Spring/Hibernate o ASP?
 
 <br/><br/>
 
-### Bien: Estructura tu solución en componentes auto-contenidos
+### Bien: Estructurar tu solución en componentes auto-contenidos
 
-![alt text](https://github.com/i0natan/nodebestpractices/blob/master/assets/images/structurebycomponents.PNG "Solución estructurada en componentes")
+```bash
+my-system
+├─ apps (componentes)
+│  ├─ orders
+│  │ ├─ package.json
+│  │ ├─ api
+│  │ ├─ domain
+│  │ ├─ data-access
+│  ├─ users
+│  ├─ payments
+├─ libraries (funcionalidad genérica transversal a componentes)
+│  ├─ logger
+│  ├─ authenticator
+```
 
 <br/><br/>
 
-### Mal: Agrupa tus archivos según rol técnico
+### Mal: Agrupar tus archivos según rol técnico
 
-![alt text](https://github.com/i0natan/nodebestpractices/blob/master/assets/images/structurebyroles.PNG "Solución estructurada según roles técnicos")
+```bash
+my-system
+├─ controllers
+│  ├─ user-controller.js
+│  ├─ order-controller.js
+│  ├─ payment-controller.js
+├─ services
+│  ├─ user-service.js
+│  ├─ order-service.js
+│  ├─ payment-service.js
+├─ models
+│  ├─ user-model.js
+│  ├─ order-model.js
+│  ├─ payment-model.js
+```
