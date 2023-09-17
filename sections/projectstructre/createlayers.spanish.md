@@ -21,14 +21,12 @@ my-system
 
 **- Dominio (domain) -** Aquí es donde fluye la aplicación, donde vive la lógica y los datos. Esta capa acepta entrada independiente del protocolo, un objeto JavaScript simple y también devuelve uno[^1]. Técnicamente contiene objetos de código comunes como servicios, dto/entidades y clientes que llaman a servicios externos. También suele llamar a la capa de acceso a datos para recuperar o conservar información.
 
-**- Acceso a datos (data-access) -** Aquí es donde la aplicación contiene código que interactúa con la BDD. Idealmente, debería externalizar una interfaz que devuelva/obtenga un objeto JavaScript simple que sea agnóstica de la BDD (también conocido como patrón de repositorio). Esta capa incluye utilidades auxiliares de BDD, como constructores de consultas[^2], ORM[^3], controladores de base de datos y otras bibliotecas de implementación.
+**- Acceso a datos (data-access) -** Aquí es donde la aplicación contiene código que interactúa con la BDD. Idealmente, debería externalizar una interfaz que devuelva/obtenga un objeto JavaScript simple que sea agnóstica de la BDD (también conocido como patrón de repositorio). Esta capa incluye utilidades auxiliares de BDD, como constructores de consultas[^2], ORM, controladores de base de datos y otras bibliotecas de implementación.
 
 **¿Cuál es el mérito? -** Al tener una infraestructura flexible que permite agregar más llamadas API y consultas de BDD rápidamente, un desarrollador puede codificar una función más rápido centrándose en la carpeta del dominio. Es decir, se dedica menos tiempo a actividades técnicas y más a actividades que agregan valor. Este es un rasgo omnipresente que está en el corazón de la mayoría de las arquitecturas de software como DDD, hexagonal, arquitectura limpia y otras. Además de esto, cuando la capa de dominio no conoce ningún protocolo perimetral, puede atender a cualquier cliente y no solo a las llamadas HTTP.
 
 **¿Por qué no MVC o una arquitectura limpia? -** El patrón de 3 niveles logra un gran equilibrio entre lograr el objetivo de separación y al mismo tiempo mantener la estructura simple. También carece de abstracciones: cada nivel representa el nivel físico del mundo real que visitará cada solicitud. Por otro lado, MVC es un patrón simplista donde las letras VC representan sólo unas pocas líneas de un código y la letra M significa cualquier otra cosa. La arquitectura limpia es una arquitectura con un alto nivel de abstracciones que puede lograr una separación aún mayor, pero el precio es desproporcionadamente mayor debido a la mayor complejidad.
 
-[^1] N. del T. se asume que se trata de objetos que no poseen dependencias a los frameworks utilizados.
+[^1]: N. del T. se asume que se trata de objetos que no poseen dependencias a los frameworks utilizados.
 
-[^2] N. del T. en inglés query builders.
-
-[^3] N. del T. Acrónimo de Object Relational Mapping (asignación objeto-relacional) es un biblioteca o framework que ayuda, entre otras cosas, al asignación de de las asociaciones entre objetos de la aplicación y los registros de la base de datos.
+[^2]: N. del T. en inglés query builders.
