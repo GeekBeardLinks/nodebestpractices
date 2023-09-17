@@ -1,4 +1,4 @@
-# Aplicar capas para componentes, mantén Express dentro de sus límites
+# Construye tu aplicación en capas, mantén Express dentro de sus límites
 
 <br/><br/>
 
@@ -14,7 +14,7 @@ my-system
    │  │  ├─ api # el controlador va aquí
    │  │  ├─ message-queue # el consumidor de mensaje va aqui
    │  ├─ domain (dominio) # funcionalidades y flujos: DTO, servicios, lógica
-   │  ├─ data-access (acceso a datos) # Llamadas a DB sin ORM
+   │  ├─ data-access (acceso a datos) # Llamadas a BDD sin ORM
 ```
 
 **- Puntos de entrada (entry-points) -** Aquí es donde comienzan las solicitudes y los flujos, ya sea API REST, GraphQL, cola de mensajes, trabajos programados o cualquier otra _puerta_ a la aplicación. La responsabilidad de esta capa es mínima: adaptar la carga útil (por ejemplo, JSON) al formato de la aplicación, incluida la primera validación, llamar a la capa lógica/dominio y devolver una respuesta. Normalmente, esto se logra con unas pocas líneas de código. Muchos usan el término "controlador" para este tipo de código también técnicamente es solo un adaptador.
