@@ -1,10 +1,12 @@
-# Construye tu aplicación en capas, mantén Express dentro de sus límites
+# Separe su aplicación en capas, mantenga la capa web dentro de sus límites
 
 <br/><br/>
 
-### Separa el código de los componentes en 3 capas
+### Separe en 3 capas el código de los componentes 
 
-La raíz de cada componente debería contener 3 carpetas que representan intereses y etapas comunes a cada transacción:
+
+
+El directorio raíz de cada componente debería contener 3 carpetas que representan intereses y etapas comunes a cada transacción:
 
 ```bash
 my-system
